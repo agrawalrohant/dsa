@@ -1,4 +1,4 @@
-/*https://www.scaler.com/academy/mentee-dashboard/class/41046/assignment/problems/440?navref=cl_tt_lst_nm*/
+// question --> https://www.scaler.com/academy/mentee-dashboard/class/41046/assignment/problems/440?navref=cl_tt_lst_nm
 
 module.exports = { 
     //param A : integer
