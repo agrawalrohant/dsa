@@ -1,9 +1,9 @@
-var filename = "./Divide Integers.js"; // Update the file name to debug here
+var filename = "./Min XOR value.js"; // Update the file name to debug here
 
 var scalerModule = require(filename);
 
 // Update the paramters to pass
-var reuslt = scalerModule.divide(-2147483648, -1);
+var reuslt = scalerModule.findMinXor([15, 5, 1, 10, 2]);
 
 console.log(reuslt);
 // from CMD run command "node main" or "node scaler/main" from outer folder
