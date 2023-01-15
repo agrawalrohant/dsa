@@ -1,32 +1,39 @@
-// question --> https://www.scaler.com/academy/mentee-dashboard/class/52294/homework/problems/222?navref=cl_tt_lst_nm
-
 // Definition for a  binary tree node
 //    function TreeNode(data){
 //      this.data = data
 //      this.left = null
 //      this.right = null
 //    }
+
 module.exports = {
   //param A : root node of tree
   //return a array of integers
   stack: [],
-  preorderTraversal: function (A) {
+  postorderTraversal: function (A) {
     if (A == null) {
       return [];
     }
-    let result = [];
-    this.stack = [];
-    let current = A;
-    while (current != null || !this.isEmpty()) {
-      while (current) {
-        result.push(current.data);
-        this.stack.push(current);
-        current = current.left;
-      }
-      current = this.stack.pop();
-      current = current.right;
+    let results = [];
+    this.stack.push(A);
+    while (!this.isEmpty()) {
+      let curr = this.stack.pop();
+      results.push(curr.data);
+      if (curr.left) this.stack.push(curr.left);
+      if (curr.right) this.stack.push(curr.right);
     }
-    return result;
+    return this.reverse(results);
+  },
+  reverse: function (arr) {
+    let s = 0;
+    let e = arr.length - 1;
+    while (s < e) {
+      let temp = arr[s];
+      arr[s] = arr[e];
+      arr[e] = temp;
+      s++;
+      e--;
+    }
+    return arr;
   },
   push: function (x) {
     this.stack[this.stack.length] = x;
@@ -41,23 +48,24 @@ module.exports = {
     else return false;
   },
 };
-
 // Using recursion
-/*module.exports = {
+/*
+module.exports = {
   //param A : root node of tree
   //return a array of integers
   results: [],
-  preorderTraversal: function (A) {
+  postorderTraversal: function (A) {
     this.results = [];
-    this.getPreorder(A);
+    this.getPostorder(A);
     return this.results;
   },
-  getPreorder: function (root) {
+  getPostorder: function (root) {
     if (root == null) {
       return;
     }
+    this.getPostorder(root.left);
+    this.getPostorder(root.right);
     this.results.push(root.data);
-    this.getPreorder(root.left);
-    this.getPreorder(root.right);
   },
-};*/
+};
+*/
