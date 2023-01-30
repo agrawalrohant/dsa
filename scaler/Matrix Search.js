@@ -5,48 +5,33 @@ module.exports = {
   //param B : integer
   //return an integer
   searchMatrix: function (A, B) {
-    let startRow = 0;
-    let startCol = 0;
-    let endRow = A.length - 1;
-    let endCol = A[0].length - 1;
-    while (startRow + startCol <= endCol + endRow) {
-      midRow = parseInt((startRow + endRow) / 2);
-      midCol = parseInt((startCol + endCol) / 2);
-      let scanElement = A[midRow][midCol];
-      if (scanElement == B) {
-        return 1;
-      } else if (scanElement < B) {
-        // reject first half
-        if (midCol + 1 > A[0].length - 1) {
-          if (midRow == A.length - 1) {
-            break;
-          }
-          startCol = 0;
-        } else {
-          startCol = midCol + 1;
-        }
-        if (midRow + 1 > A.length - 1) {
-          startRow = midRow;
-        } else {
-          startRow = midRow + 1;
-        }
-      } else {
-        // reject second half
-        if (midCol - 1 < 0) {
-          if (midRow == 0) {
-            break;
-          }
-          midCol = A[0].length - 1;
-        } else {
-          endCol = midCol - 1;
-        }
-        if (midRow - 1 < 0) {
-          endRow = midRow;
-        } else {
-          endRow = midRow - 1;
-        }
+    sRow = 0;
+    eRow = A.length - 1;
+    while (sRow <= eRow) {
+      let midRow = parseInt((sRow + eRow) / 2);
+      if (A[midRow][0] <= B && A[midRow][A[0].length - 1] >= B) {
+        return binarySearch(A[midRow], B);
+      } else if (A[midRow][0] > B) {
+        eRow = midRow - 1;
+      } else if (A[midRow][A[0].length - 1] < B) {
+        sRow = midRow + 1;
       }
     }
     return 0;
+    function binarySearch(arr, target) {
+      let s = 0;
+      let e = arr.length - 1;
+      while (s <= e) {
+        let mid = parseInt((s + e) / 2);
+        if (arr[mid] == target) {
+          return 1;
+        } else if (arr[mid] > target) {
+          e = mid - 1;
+        } else {
+          s = mid + 1;
+        }
+      }
+      return 0;
+    }
   },
 };
