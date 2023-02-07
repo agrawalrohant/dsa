@@ -1,3 +1,29 @@
+// question -->https://www.scaler.com/academy/mentee-dashboard/class/52308/homework/problems/4950/?navref=cl_pb_nv_tb
+
+module.exports = {
+  //param A : array of array of integers
+  //param B : integer
+  //return an integer
+  solve: function (A, B) {
+    let maxHeap = new MaxHeap([]);
+    let count = 0;
+    // Insert B elements
+    for (i = 0; i < A.length; i++) {
+      for (j = 0; j < A[0].length; j++) {
+        if (count < B) {
+          maxHeap.add(A[i][j]);
+          count++;
+        } else {
+          if (maxHeap.peek() > A[i][j]) {
+            maxHeap.poll();
+            maxHeap.add(A[i][j]);
+          }
+        }
+      }
+    }
+    return maxHeap.peek();
+  },
+};
 class MaxHeap {
   constructor(array) {
     this.createHeap(array);
@@ -32,9 +58,9 @@ class MaxHeap {
     this.values[index2] = temp;
     // Alternate code : swap using ES6 destructuring
     /*[this.values[index1], this.values[index2]] = [
-        this.values[index2],
-        this.values[index1],
-      ];*/
+          this.values[index2],
+          this.values[index1],
+        ];*/
   }
 
   shiftDown(index) {
@@ -127,15 +153,5 @@ class MaxHeap {
       for (let i = Math.floor(this.values.length / 2); i >= 0; i--) {
         this.shiftDown(i);
       }
-  }
-
-  print() {
-    let i = 0;
-    while (!this.isLeaf(i)) {
-      console.log("PARENT:", this.values[i]);
-      console.log("LEFT CHILD:", this.values[this.leftChild(i)]);
-      console.log("RIGHT CHILD:", this.values[this.rightChild(i)]);
-      i++;
-    }
   }
 }

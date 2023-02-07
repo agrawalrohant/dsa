@@ -1,4 +1,27 @@
-class MaxHeap {
+// question -->https://www.scaler.com/academy/mentee-dashboard/class/52308/homework/problems/6708?navref=cl_tt_lst_nm
+
+module.exports = {
+  //param A : array of integers
+  //param B : integer
+  //return a array of integers
+  solve: function (A, B) {
+    let minHeap = new MinHeap([]);
+    for (let i = 0; i < A.length; i++) {
+      for (let j = i + 1; j < A.length; j++) {
+        minHeap.add(new FractionNode(A[i], A[j]));
+      }
+    }
+    let count = 0;
+    let ans = null;
+    while (count != B) {
+      ans = minHeap.poll();
+      count++;
+    }
+    return [ans.num, ans.den];
+  },
+};
+
+class MinHeap {
   constructor(array) {
     this.createHeap(array);
   }
@@ -32,9 +55,9 @@ class MaxHeap {
     this.values[index2] = temp;
     // Alternate code : swap using ES6 destructuring
     /*[this.values[index1], this.values[index2]] = [
-        this.values[index2],
-        this.values[index1],
-      ];*/
+              this.values[index2],
+              this.values[index1],
+            ];*/
   }
 
   shiftDown(index) {
@@ -47,13 +70,23 @@ class MaxHeap {
         largestIndex = index;
 
       // if the left child > parent
-      if (this.values[leftChildIndex] > this.values[largestIndex]) {
+      if (
+        this.values[leftChildIndex] &&
+        this.values[largestIndex] &&
+        this.values[leftChildIndex].getValue() <
+          this.values[largestIndex].getValue()
+      ) {
         // reassign largest index to left child index
         largestIndex = leftChildIndex;
       }
 
       // if the right child > element at largest index (either parent or left child)
-      if (this.values[rightChildIndex] >= this.values[largestIndex]) {
+      if (
+        this.values[rightChildIndex] &&
+        this.values[largestIndex] &&
+        this.values[rightChildIndex].getValue() <=
+          this.values[largestIndex].getValue()
+      ) {
         // reassign largest index to right child index
         largestIndex = rightChildIndex;
       }
@@ -75,7 +108,7 @@ class MaxHeap {
     // while we haven't reached the root node and the current element is greater than its parent node
     while (
       currentIndex > 0 &&
-      this.values[currentIndex] > this.values[parentIndex]
+      this.values[currentIndex].getValue() < this.values[parentIndex].getValue()
     ) {
       // swap
       this.swap(currentIndex, parentIndex);
@@ -93,7 +126,7 @@ class MaxHeap {
     this.shiftUp(this.values.length - 1);
   }
 
-  // returns value of max without removing
+  // returns value of min without removing
   peek() {
     return this.values[0];
   }
@@ -102,12 +135,12 @@ class MaxHeap {
     return this.values.length;
   }
 
-  // removes and returns max element
+  // removes and returns min element
   poll() {
     if (this.values.length < 1) return "heap is empty";
 
-    // get max and last element
-    const max = this.values[0];
+    // get min and last element
+    const min = this.values[0];
     const end = this.values.pop();
     // reassign first element to the last element
     if (this.values.length > 0) {
@@ -116,8 +149,8 @@ class MaxHeap {
       this.shiftDown(0);
     }
 
-    // return the max
-    return max;
+    // return the min
+    return min;
   }
 
   createHeap(array) {
@@ -128,14 +161,16 @@ class MaxHeap {
         this.shiftDown(i);
       }
   }
+}
 
-  print() {
-    let i = 0;
-    while (!this.isLeaf(i)) {
-      console.log("PARENT:", this.values[i]);
-      console.log("LEFT CHILD:", this.values[this.leftChild(i)]);
-      console.log("RIGHT CHILD:", this.values[this.rightChild(i)]);
-      i++;
-    }
+class FractionNode {
+  num;
+  den;
+  constructor(num, den) {
+    this.num = num;
+    this.den = den;
+  }
+  getValue() {
+    return this.num / this.den;
   }
 }

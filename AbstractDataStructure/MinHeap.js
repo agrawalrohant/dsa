@@ -122,10 +122,11 @@ class MinHeap {
 
   createHeap(array) {
     this.values = array;
-    // since leaves start at floor(nodes / 2) index, we work from the leaves up the heap
-    for (let i = Math.floor(this.values.length / 2); i >= 0; i--) {
-      this.shiftDown(i);
-    }
+    if (this.values.length > 0)
+      // since leaves start at floor(nodes / 2) index, we work from the leaves up the heap
+      for (let i = Math.floor(this.values.length / 2); i >= 0; i--) {
+        this.shiftDown(i);
+      }
   }
 
   print() {
