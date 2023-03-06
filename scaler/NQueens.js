@@ -6,6 +6,9 @@ module.exports = {
   solveNQueens: function (A) {
     let ans = [];
     let matrix = [];
+    let colSet = new Set();
+    let leftDiag = new Set();
+    let rightDiag = new Set();
     for (let i = 0; i < A; i++) {
       let temp = [];
       for (let j = 0; j < A; j++) {
@@ -42,19 +45,33 @@ module.exports = {
         return true;
       }
       for (let col = 0; col < A; col++) {
-        if (isSafe(matrix, row, col)) {
+        if (isSafe2(matrix, row, col)) {
           matrix[row][col] = "Q";
-          if (placeQueens(matrix, A, row + 1)) {
-            // dont return . Push array to ans and continue.
-            //return true;
-          }
+          colSet.add(col);
+          leftDiag.add(row - col);
+          rightDiag.add(row + col);
+          placeQueens(matrix, A, row + 1);
+          colSet.delete(col);
+          leftDiag.delete(row - col);
+          rightDiag.delete(row + col);
           matrix[row][col] = ".";
         }
       }
       return false;
     }
 
-    function isSafe(matrix, row, col) {
+    function isSafe2(matrix, row, col) {
+      if (
+        colSet.has(col) ||
+        leftDiag.has(row - col) ||
+        rightDiag.has(row + col)
+      ) {
+        return false;
+      }
+      return true;
+    }
+
+    /*function isSafe(matrix, row, col) {
       // check column
       for (let i = 0; i < row; i++) {
         if (matrix[i][col] == "Q") {
@@ -85,6 +102,6 @@ module.exports = {
       }
 
       return true;
-    }
+    }*/
   },
 };
