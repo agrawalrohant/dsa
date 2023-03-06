@@ -1,3 +1,5 @@
+// question --> https://www.scaler.com/academy/mentee-dashboard/class/52316/assignment/problems/141?navref=cl_tt_lst_nm
+
 module.exports = {
   //param A : integer
   //return a array of array of integers
