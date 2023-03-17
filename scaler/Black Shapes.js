@@ -1,3 +1,5 @@
+// question --> https://www.scaler.com/academy/mentee-dashboard/class/52332/homework/problems/291/?navref=cl_pb_nv_tb
+
 module.exports = {
   //param A : array of strings
   //return an integer
@@ -15,7 +17,7 @@ module.exports = {
     for (let i = 0; i < A.length; i++) {
       for (let j = 0; j < A[0].length; j++) {
         // Island & not visted
-        if (A[i][j] == 'X' && visited[i][j] == -1) {
+        if (A[i][j] == "X" && visited[i][j] == -1) {
           count++;
           q.enqueue(i, j, 0);
           visited[i][j] = 0;
@@ -33,7 +35,7 @@ module.exports = {
                 currj >= 0 &&
                 curri < A.length &&
                 currj < A[0].length &&
-                A[curri][currj] == 'X' &&
+                A[curri][currj] == "X" &&
                 visited[curri][currj] == -1
               ) {
                 q.enqueue(curri, currj, curr.value + 1);
