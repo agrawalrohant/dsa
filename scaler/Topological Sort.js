@@ -21,7 +21,6 @@ module.exports = {
     let inDegreeMap = new Map();
     for (let i = 1; i <= A; i++) {
       inDegreeMap.set(i, 0);
-      //new Node(vertex,count);
     }
     for (let i = 0; i < B.length; i++) {
       inDegreeMap.set(B[i][1], inDegreeMap.get(B[i][1]) + 1);
