@@ -1,17 +1,21 @@
-var filename = "./Rotten Oranges.js"; // Update the file name to debug here
+var filename = "./Partition List.js"; // Update the file name to debug here
 
 var scalerModule = require(filename);
 
-let reuslt = scalerModule.solve([
-  [2, 0, 2, 2, 2, 0, 2, 1, 1, 0],
-  [0, 1, 2, 0, 2, 0, 0, 1, 0, 1],
-  [0, 1, 1, 1, 2, 0, 1, 1, 2, 1],
-  [2, 0, 2, 0, 1, 1, 2, 1, 0, 1],
-  [1, 0, 1, 1, 0, 1, 2, 0, 2, 2],
-  [0, 2, 1, 1, 2, 2, 0, 2, 1, 2],
-  [2, 1, 0, 2, 0, 0, 0, 0, 1, 1],
-  [2, 2, 0, 2, 2, 1, 1, 1, 2, 2],
-]);
+function Node(data){
+          this.data = data
+          this.next = null
+        }
+
+        let n1 = new Node(384);
+        let n2 = new Node(183);
+        let n3 = new Node(463);
+        let n4 = new Node(31);
+        n1.next = n2;
+        n2.next = n3;
+        n3.next = n4;
+        
+let reuslt = scalerModule.partition(n1,77);
 
 console.log("Result : " + reuslt);
 
