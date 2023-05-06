@@ -14,9 +14,6 @@ module.exports = {
         uniqueArr.push(A[i]);
       }
     }
-    /*uniqueArr.sort((a, b) => {
-      a - b;
-    });*/
     let results = [];
     getAllSubSet([], 0, uniqueArr, A);
 
