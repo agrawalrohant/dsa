@@ -5,27 +5,27 @@ module.exports = {
   //param B : integer
   //param C : integer
   //return an integer
-  pow: function (A, B, C) {
-    let ans = Number(this.power(BigInt(A), BigInt(B), BigInt(C)));
-    if (ans < 0) {
-      return ans + C;
-    } else {
-      return ans;
-    }
-  },
   power: function (A, B, C) {
-    if (BigInt(B) == 0 && C == BigInt(1)) {
+    if (A == BigInt(0)) {
       return BigInt(0);
     }
-    if (BigInt(B) == 0 || A == BigInt(1)) {
+    if (B == BigInt(0) || A == BigInt(1)) {
       return BigInt(1);
     }
-    let halfPower = this.power(A, BigInt(Math.floor(Number(B / BigInt(2)))), C);
-    if (B % BigInt(2) == 0) {
-      return ((halfPower % C) * (halfPower % C)) % C;
+    let halfPow = BigInt(this.pow(A, parseInt(B / BigInt(2)), C));
+    if (B % BigInt(2) == BigInt(0)) {
+      return (halfPow * halfPow) % C;
     } else {
-      return ((halfPower % C) * (halfPower % C) * (A % C)) % C;
+      return (((halfPow * halfPow) % C) * (A % C)) % C;
     }
+  },
+  pow: function (A, B, C) {
+    let ans = Number(this.power(BigInt(A), BigInt(B), BigInt(C)));
+    // Never return a negative value
+    if (ans < 0) {
+      return Number(BigInt(ans) + BigInt(C));
+    }
+    return ans;
   },
 };
 
