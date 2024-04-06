@@ -1,3 +1,5 @@
+// question --> https://www.scaler.com/academy/mentee-dashboard/class/41055/homework/problems/10766?navref=cl_tt_nv
+
 process.stdin.resume();
 process.stdin.setEncoding("utf-8");
 
