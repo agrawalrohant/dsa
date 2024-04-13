@@ -1,6 +1,6 @@
-module.exports = {
-  // question --> https://www.scaler.com/academy/mentee-dashboard/class/52326/assignment/problems/9292/?navref=cl_pb_nv_tb
+// question --> https://www.scaler.com/academy/mentee-dashboard/class/52326/assignment/problems/9292/?navref=cl_pb_nv_tb
 
+module.exports = {
   //param A : array of integers
   //param B : array of integers
   //param C : integer
